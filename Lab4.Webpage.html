@@ -25,35 +25,45 @@
         <div id="prediction-result"></div>
     </div>
 
-    <script>
-        document.getElementById("fish-form").addEventListener("submit", function(event) {
-            event.preventDefault();
+<script>
+    document.getElementById("fish-form").addEventListener("submit", function (event) {
+        event.preventDefault();
 
-            const formData = new FormData(event.target);
-            const species = formData.get("species");
-            const length1 = parseFloat(formData.get("length1"));
-            const length2 = parseFloat(formData.get("length2"));
-            const length3 = parseFloat(formData.get("length3"));
-            const height = parseFloat(formData.get("height"));
-            const width = parseFloat(formData.get("width"));
+        const formData = new FormData(event.target);
+        const species = formData.get("species");
+        const length1 = parseFloat(formData.get("length1"));
+        const length2 = parseFloat(formData.get("length2"));
+        const length3 = parseFloat(formData.get("length3"));
+        const height = parseFloat(formData.get("height"));
+        const width = parseFloat(formData.get("width"));
 
-            const inputData = {
-                "Species": species,
-                "Length1": length1,
-                "Length2": length2,
-                "Length3": length3,
-                "Height": height,
-                "Width": width
-            };
+        // Encode the species input using one-hot encoding
+        const speciesBream = species === "Bream" ? 1 : 0;
+        const speciesParkki = species === "Parkki" ? 1 : 0;
+        const speciesPerch = species === "Perch" ? 1 : 0;
+        const speciesPike = species === "Pike" ? 1 : 0;
+        const speciesRoach = species === "Roach" ? 1 : 0;
+        const speciesSmelt = species === "Smelt" ? 1 : 0;
+        const speciesWhitefish = species === "Whitefish" ? 1 : 0;
 
-            // Send the input data to the server using an API or other means to get the prediction
+        const inputData = {
+            "Length1": length1,
+            "Length2": length2,
+            "Length3": length3,
+            "Height": height,
+            "Width": width,
+            "Species_Bream": speciesBream,
+            "Species_Parkki": speciesParkki,
+            "Species_Perch": speciesPerch,
+            "Species_Pike": speciesPike,
+            "Species_Roach": speciesRoach,
+            "Species_Smelt": speciesSmelt,
+            "Species_Whitefish": speciesWhitefish
+        };
 
-            // For demonstration purposes, we'll just log the data here
-            console.log(inputData);
+        console.log(inputData);
+    });
+</script>
 
-            // You can use JavaScript to send the data to the server, perform the prediction,
-            // and display the result in the "prediction-result" div.
-        });
-    </script>
 </body>
 </html>
